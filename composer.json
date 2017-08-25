@@ -1,0 +1,19 @@
+{
+    "name": "alex-k/filestorage",
+    "description": "filestorage example",
+    "type": "library",
+    "require-dev": {
+        "codeception/codeception": "^2.3"
+    },
+    "authors": [
+        {
+            "name": "alex kochetov",
+            "email": "alex@kochetov.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "scripts": {
+      "test": "./vendor/bin/codecept run --steps"
+    }
+}
