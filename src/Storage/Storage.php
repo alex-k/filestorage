@@ -11,13 +11,14 @@ namespace Alexk\Storage;
 interface Storage
 {
     /**
-     * @return string | null
+     * @param resource $out
+     * @return void
      * @throws Exception\ReadException
      */
-    public function read();
+    public function read($out);
 
     /**
-     * @param string $data
+     * @param resource $data
      * @return void
      * @throws Exception\WriteException
      */

@@ -1,11 +1,12 @@
 <?php
+include __DIR__.DIRECTORY_SEPARATOR.'bootstrap.php';
+
+use Alexk\Storage\FileNameGenerator\HashTree;
+use Alexk\Storage\FileStorage;
 
 list(, $filename) = $argv + [NULL];
 
-if (!$filename) {
-    exit (1);
-}
-
 $in = fopen("php://stdin", "rb");
 
-file_put_contents("data/file",$in);
+$storage = new FileStorage(new HashTree($filename));
+$storage->write($in);

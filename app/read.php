@@ -1,15 +1,12 @@
 <?php
+include __DIR__.DIRECTORY_SEPARATOR.'bootstrap.php';
+
+use Alexk\Storage\FileNameGenerator\HashTree;
+use Alexk\Storage\FileStorage;
 
 list(, $filename) = $argv + [NULL];
 
-
-if (!$filename) {
-    exit (1);
-}
-
-$in = fopen("data/file", "rb");
 $out = fopen("php://stdout", "w");
 
-while (!feof($in)) {
-    fwrite($out,fread($in,8192));
-}
+$storage = new FileStorage(new HashTree($filename));
+$storage->read($out);
