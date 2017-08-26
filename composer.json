@@ -15,5 +15,10 @@
     "require": {},
     "scripts": {
       "test": "./vendor/bin/codecept run --steps"
+    },
+    "autoload": {
+        "psr-4": {
+            "Alexk\\": "src/"
+        }
     }
 }
