@@ -4,7 +4,15 @@
 php composer.phar install
 
 * Test *
+ - all
+`php composer.phar test`
 
-php composer.phar test
-or
-./vendor/bin/codecept run --steps
+ - unit
+`./vendor/bin/codecept run unit --steps`
+
+ - functional
+`./vendor/bin/codecept run functional --steps`
+
+ - load
+
+ **TODO**
