@@ -9,7 +9,8 @@
 namespace Alexk\Storage;
 
 
-use Alexk\Storage\Exception\FileNotFoundException;
+use Alexk\Storage\Exception\ReadException;
+use Alexk\Storage\Exception\WriteException;
 
 class FileStorage implements Storage
 {
@@ -17,14 +18,18 @@ class FileStorage implements Storage
     private $filename;
 
 
-    public function __construct(FileNameGenerator $generator)
+    public function __construct(FileNameGenerator $generator, $dir_name = '.')
     {
-        $this->filename = $generator->getPath();
+        $this->filename = $dir_name.DIRECTORY_SEPARATOR.$generator->getPath();
     }
 
     public function read($out)
     {
         $in = fopen($this->filename, "rb");
+
+        if (!$in) {
+            throw new ReadException($this->filename);
+        }
 
         while (!feof($in)) {
             fwrite($out, fread($in, 8192));
@@ -33,7 +38,13 @@ class FileStorage implements Storage
 
     public function write($data)
     {
-        file_put_contents($this->filename, $data);
+        $dir_name = dirname($this->filename);
+        if (!file_exists($dir_name)) {
+            mkdir($dir_name,0777,true);
+        }
+        if (!file_put_contents($this->filename, $data)) {
+            throw new WriteException($this->filename);
+        }
     }
 
 }

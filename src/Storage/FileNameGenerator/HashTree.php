@@ -38,7 +38,9 @@ class HashTree implements FileNameGenerator
 
     public function getPath()
     {
-        return 'data'.DIRECTORY_SEPARATOR.'file';
+        $hash = md5($this->filename);
+        $path = implode(DIRECTORY_SEPARATOR,str_split($hash));
+        return $path;
     }
 
 }

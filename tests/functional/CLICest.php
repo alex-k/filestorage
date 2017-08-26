@@ -27,6 +27,14 @@ class CLICest
         $I->seeResultCodeIsNot(0);
     }
 
+    public function failReadUnexistedFilename(FunctionalTester $I)
+    {
+        $unexisted_filename = uniqid().'.txt';
+        $I->runShellCommand("php app/read.php {$unexisted_filename}", false);
+        $I->seeResultCodeIsNot(0);
+    }
+
+
     public function failRead2WithEmptyFilename(FunctionalTester $I)
     {
         $I->runShellCommand("php app/read.php", false);
@@ -52,8 +60,8 @@ class CLICest
     public function readAnotherFile(FunctionalTester $I)
     {
         $another_file = uniqid().'.txt';
-        $I->runShellCommand("php app/read.php {$another_file}");
-        $I->seeResultCodeIs(0);
+        $I->runShellCommand("php app/read.php {$another_file}", false);
+        $I->seeResultCodeIsNot(0);
         $I->dontSeeInShellOutput($this->text);
     }
 }
