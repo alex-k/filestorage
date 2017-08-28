@@ -13,6 +13,7 @@ php composer.phar install
  - functional
 `./vendor/bin/codecept run functional --steps`
 
- - load
+ - acceptance
+`./vendor/bin/codecept run acceptance --steps`
 
  **TODO**
