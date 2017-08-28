@@ -23,4 +23,11 @@ interface Storage
      * @throws Exception\WriteException
      */
     public function write($data);
+
+    /**
+     * @param resource $data
+     * @return void
+     * @throws Exception\WriteException
+     */
+    public function delete();
 }

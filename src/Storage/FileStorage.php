@@ -47,4 +47,12 @@ class FileStorage implements Storage
         }
     }
 
+    public function delete()
+    {
+        if (!unlink($this->filename)) {
+            throw new WriteException($this->filename);
+        }
+    }
+
+
 }
